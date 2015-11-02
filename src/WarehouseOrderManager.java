@@ -468,15 +468,7 @@ public class WarehouseOrderManager {
 		{
 			if (arrayNN.get(i).getStatus() == false) //ignores elements that have already been set as best routes
 			{
-				if(q == (arrayNN.size() - (count) )) //this ensures the values for oldX and oldY are only changed when all the rows of the array have been seen.
-					   //the count+1 is to ensure as the array rows are changed from false to true they are not included in the array size
-{
-oldX = arrayNN.get(coordinate).getX(); //sets the X values for the coordinate of the best route
-oldY = arrayNN.get(coordinate).getY(); //sets the Y values for the coordinate of the best route
-arrayNN.get(coordinate).setStatus(true); //sets true so that for function removes arrayNN row that was the best route so that it isn't included in next pass
-}
-q++;	
-				if(Math.pow((Math.pow(arrayNN.get(i).getX()-oldX,2)+(Math.pow(arrayNN.get(count).getY()-oldY,2))),0.5) < low)
+					if(Math.pow((Math.pow(arrayNN.get(i).getX()-oldX,2)+(Math.pow(arrayNN.get(count).getY()-oldY,2))),0.5) < low)
 					{
 						arrayNN2.get(count).setStep(count+1); //generates a step number for arrayNN2
 						int NNID = arrayNN.get(i).getProductID(); // get product ID from the arrayNN
@@ -488,7 +480,14 @@ q++;
 						coordinate = i; // stores i value of the index that was the best route
 					//	System.out.println(arrayNN2.get(coordinate));		
 					}
-					
+					if(q == (arrayNN.size() - (count) )) //this ensures the values for oldX and oldY are only changed when all the rows of the array have been seen.
+														   //the count+1 is to ensure as the array rows are changed from false to true they are not included in the array size
+					{
+						oldX = arrayNN.get(coordinate).getX(); //sets the X values for the coordinate of the best route
+						oldY = arrayNN.get(coordinate).getY(); //sets the Y values for the coordinate of the best route
+						arrayNN.get(coordinate).setStatus(true); //sets true so that for function removes arrayNN row that was the best route so that it isn't included in next pass
+					}
+					q++;
 					//if() //want a decreasing number starting at original array size for NN -1 each count
 					//oldX = arrayNN.get(coordinate).getX(); //sets the X values for the coordinate of the best route
 					//oldY = arrayNN.get(coordinate).getY(); //sets the Y values for the coordinate of the best route
