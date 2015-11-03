@@ -26,53 +26,53 @@ public class CustomerOrder {
 	int deficit;
 	Scanner input = new Scanner(System.in);
 	final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	final String DB_URL = "jdbc:mysql://localhost/nbdatabase";
+	final String DB_URL = "jdbc:mysql://10.50.15.1:3306/nbdatabase";
 	final String USER = "root";
 	final String PASS = "NETbuilder";
 
 		
   			
-	public void customerOrderSQL(){	
-		Connection conn = null;
-		Statement stmt = null;
-			try{
-	      //STEP 2: Register JDBC driver
-	      Class.forName("com.mysql.jdbc.Driver");
-
-	      //STEP 3: Open a connection
-	      System.out.println("Connecting to database...");
-	      conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-	      //STEP 4: Execute a query
-	      System.out.println("Creating database...");
-	      stmt = conn.createStatement();
-			 }catch(SQLException se){
-			      //Handle errors for JDBC
-			      se.printStackTrace();
-			 }catch(Exception e){
-			      //Handle errors for Class.forName
-			      e.printStackTrace();
-			 }
+//	public void customerOrderSQL(){	
+//		Connection conn = null;
+//		Statement stmt = null;
+//			try{
+//	      //STEP 2: Register JDBC driver
+//	      Class.forName("com.mysql.jdbc.Driver");
+//
+//	      //STEP 3: Open a connection
+//	      System.out.println("Connecting to database...");
+//	      conn = DriverManager.getConnection(DB_URL, USER, PASS);
+//
+//	      //STEP 4: Execute a query
+//	      System.out.println("Creating database...");
+//	      stmt = conn.createStatement();
+//			 }catch(SQLException se){
+//			      //Handle errors for JDBC
+//			      se.printStackTrace();
+//			 }catch(Exception e){
+//			      //Handle errors for Class.forName
+//			      e.printStackTrace();
+//			 }
 		
-		ResultSet resultsCustomerOrder;
-		ArrayList<CustomerOrder> arrayCustomerOrder = new ArrayList<CustomerOrder>(); //create empty array
-		try {
-			String sqlCustomerOrder = "SELECT customer_order_id,customer_id,status FROM customerorder"; //SELECT variable1,variable2 FROM tablename in MySQL
-			resultsCustomerOrder = stmt.executeQuery(sqlCustomerOrder);
-			while (resultsCustomerOrder.next()) {
-				 int customerOrderID = resultsCustomerOrder.getInt("customer_order_id"); //variabletype variable = nameofresultset.gettypeofvariable(variable name in MySQL)
-				 int customerID = resultsCustomerOrder.getInt("customer_id");
-				 String customerOrderIDstring = Integer.toString(customerOrderID);
-				 //coidLabel.setText(customerOrderIDstring);
-				 String status = resultsCustomerOrder.getString("status");
-				 CustomerOrder customerOrder = new CustomerOrder(customerOrderID,customerID, status); //packages the variables in each row so that they can be input into array
-				 arrayCustomerOrder.add(customerOrder); //inputs the variables into the array
-				}
-				resultsCustomerOrder.close();
-			} 
-		catch (SQLException e) 
-		{e.printStackTrace();}
-	  	}
+//		ResultSet resultsCustomerOrder;
+//		ArrayList<CustomerOrder> arrayCustomerOrder = new ArrayList<CustomerOrder>(); //create empty array
+//		try {
+//			String sqlCustomerOrder = "SELECT customer_order_id,customer_id,status FROM customerorder"; //SELECT variable1,variable2 FROM tablename in MySQL
+//			resultsCustomerOrder = stmt.executeQuery(sqlCustomerOrder);
+//			while (resultsCustomerOrder.next()) {
+//				 int customerOrderID = resultsCustomerOrder.getInt("customer_order_id"); //variabletype variable = nameofresultset.gettypeofvariable(variable name in MySQL)
+//				 int customerID = resultsCustomerOrder.getInt("customer_id");
+//				 String customerOrderIDstring = Integer.toString(customerOrderID);
+//				 //coidLabel.setText(customerOrderIDstring);
+//				 String status = resultsCustomerOrder.getString("status");
+//				 CustomerOrder customerOrder = new CustomerOrder(customerOrderID,customerID, status); //packages the variables in each row so that they can be input into array
+//				 arrayCustomerOrder.add(customerOrder); //inputs the variables into the array
+//				}
+//				resultsCustomerOrder.close();
+//			} 
+//		catch (SQLException e) 
+//		{e.printStackTrace();}
+//	  	}
 //	public CustomerOrder()
 //	{
 //		checkedOut = false;
