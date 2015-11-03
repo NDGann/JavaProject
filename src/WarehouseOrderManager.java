@@ -19,8 +19,12 @@ public class WarehouseOrderManager {
 	int iD;
 	int idStock;
 	int deficit;
+	private static Connection conn = null;
+	private static Statement stmt = null;
 	
 	public WarehouseOrderManager() {
+		GUI sD = new GUI();
+		sD.showEvent();
 		run();
 	}
 	
@@ -31,8 +35,8 @@ public class WarehouseOrderManager {
 		final String USER = "root";
 		final String PASS = "NETbuilder";
 	
-				Connection conn = null;
-				Statement stmt = null;
+//				Connection conn = null;
+//				Statement stmt = null;
 	  			try{
 			      //STEP 2: Register JDBC driver
 			      Class.forName("com.mysql.jdbc.Driver");
@@ -135,46 +139,49 @@ public class WarehouseOrderManager {
 //		arrayCustomerOrder.add(new CustomerOrder(1005,5,"New"));
 //		arrayCustomerOrder.add(new CustomerOrder(1006,6,"New"));
 	  			
-	  	ResultSet resultsCustomerOrder;
-	  	arrayCustomerOrder = new ArrayList<CustomerOrder>(); //create empty array
-	  	try {
-	  		String sqlCustomerOrder = "SELECT customer_order_id,customer_id,status FROM customerorder"; //SELECT variable1,variable2 FROM tablename in MySQL
-	  		resultsCustomerOrder = stmt.executeQuery(sqlCustomerOrder);
-	  		while (resultsCustomerOrder.next()) 
-	  			{
-	  			 int customerOrderID = resultsCustomerOrder.getInt("customer_order_id"); //variabletype variable = nameofresultset.gettypeofvariable(variable name in MySQL)
-	  			 int customerID = resultsCustomerOrder.getInt("customer_id");
-	  			 // String customerOrderIDstring = Integer.toString(customerOrderID);
-	  			 // coidLabel.setText(customerOrderIDstring);
-	  			 String status = resultsCustomerOrder.getString("status");
-	  			 CustomerOrder customerOrder = new CustomerOrder(customerOrderID,customerID, status); //packages the variables in each row so that they can be input into array
-	  			 arrayCustomerOrder.add(customerOrder); //inputs the variables into the array
-	  			}
-	  		resultsCustomerOrder.close();
-	  		} 
-	  	catch (SQLException e) 
-	  	{e.printStackTrace();}
+	  	
+//	  	ResultSet resultsCustomerOrder;
+//	  	ArrayList<CustomerOrder> arrayCustomerOrder = new ArrayList<CustomerOrder>(); //create empty array
+//	  	try {
+//	  		String sqlCustomerOrder = "SELECT customer_order_id,customer_id,status FROM customerorder"; //SELECT variable1,variable2 FROM tablename in MySQL
+//	  		resultsCustomerOrder = stmt.executeQuery(sqlCustomerOrder);
+//	  		while (resultsCustomerOrder.next()) 
+//	  			{
+//	  			 int customerOrderID = resultsCustomerOrder.getInt("customer_order_id"); //variabletype variable = nameofresultset.gettypeofvariable(variable name in MySQL)
+//	  			 int customerID = resultsCustomerOrder.getInt("customer_id");
+//	  			 // String customerOrderIDstring = Integer.toString(customerOrderID);
+//	  			 // coidLabel.setText(customerOrderIDstring);
+//	  			 String status = resultsCustomerOrder.getString("status");
+//	  			 CustomerOrder customerOrder = new CustomerOrder(customerOrderID,customerID, status); //packages the variables in each row so that they can be input into array
+//	  			 arrayCustomerOrder.add(customerOrder); //inputs the variables into the array
+//	  			}
+//	  		resultsCustomerOrder.close();
+//	  		} 
+//	  	catch (SQLException e) 
+//	  	{e.printStackTrace();}
+	  	
+	  	
 	  		  	
 	  	
 	  	
-		ResultSet resultsOrderLine;
-		arrayOrderLine = new ArrayList<OrderLine>();
-		try {
-			String sqlOrderLine = "SELECT customer_order_id,product_id,quantity,quantity_porous FROM orderline";
-			resultsOrderLine = stmt.executeQuery(sqlOrderLine);
-			while (resultsOrderLine.next())
-				{
-				int customerOrderID = resultsOrderLine.getInt("customer_order_id");
-				int productID = resultsOrderLine.getInt("product_id");
-				int quantity = resultsOrderLine.getInt("quantity");
-				int porousQuantity = resultsOrderLine.getInt("quantity_porous");
-				OrderLine orderLine = new OrderLine(customerOrderID,productID,quantity,porousQuantity);
-				arrayOrderLine.add(orderLine);
-				}
-			resultsOrderLine.close();
-			}
-		catch (SQLException e) 
-		{e.printStackTrace();}
+//		ResultSet resultsOrderLine;
+//		arrayOrderLine = new ArrayList<OrderLine>();
+//		try {
+//			String sqlOrderLine = "SELECT customer_order_id,product_id,quantity,quantity_porous FROM orderline";
+//			resultsOrderLine = stmt.executeQuery(sqlOrderLine);
+//			while (resultsOrderLine.next())
+//				{
+//				int customerOrderID = resultsOrderLine.getInt("customer_order_id");
+//				int productID = resultsOrderLine.getInt("product_id");
+//				int quantity = resultsOrderLine.getInt("quantity");
+//				int porousQuantity = resultsOrderLine.getInt("quantity_porous");
+//				OrderLine orderLine = new OrderLine(customerOrderID,productID,quantity,porousQuantity);
+//				arrayOrderLine.add(orderLine);
+//				}
+//			resultsOrderLine.close();
+//			}
+//		catch (SQLException e) 
+//		{e.printStackTrace();}
 
 		ResultSet resultsProduct;
 		arrayProduct = new ArrayList<Product>();
@@ -195,42 +202,42 @@ public class WarehouseOrderManager {
 		catch (SQLException e) 
 		{e.printStackTrace();}
 		
-		ResultSet resultsStock;
-		arrayStock = new ArrayList<Stock>();
-		try {
-			String sqlStock = "SELECT product_id,quantity, porous_quantity, threshold FROM stock";
-			resultsStock = stmt.executeQuery(sqlStock);
-			while (resultsStock.next())
-				{
-				int productID = resultsStock.getInt("product_id");
-				int quantity = resultsStock.getInt("quantity");
-				int porousQuantity = resultsStock.getInt("porous_quantity");
-				int threshold = resultsStock.getInt("threshold");
-				Stock stock = new Stock(productID,quantity,porousQuantity,threshold);
-				arrayStock.add(stock);
-				}
-			resultsStock.close();
-			}
-		catch (SQLException e) 
-		{e.printStackTrace();}
+//		ResultSet resultsStock;
+//		arrayStock = new ArrayList<Stock>();
+//		try {
+//			String sqlStock = "SELECT product_id,quantity, porous_quantity, threshold FROM stock";
+//			resultsStock = stmt.executeQuery(sqlStock);
+//			while (resultsStock.next())
+//				{
+//				int productID = resultsStock.getInt("product_id");
+//				int quantity = resultsStock.getInt("quantity");
+//				int porousQuantity = resultsStock.getInt("porous_quantity");
+//				int threshold = resultsStock.getInt("threshold");
+//				Stock stock = new Stock(productID,quantity,porousQuantity,threshold);
+//				arrayStock.add(stock);
+//				}
+//			resultsStock.close();
+//			}
+//		catch (SQLException e) 
+//		{e.printStackTrace();}
 		
-		ResultSet resultsStockOrder;
-		arrayStockOrder = new ArrayList<StockOrder>();
-		try {
-			String sqlStockOrder = "SELECT stock_order_id,supplier_id,status FROM stockorder";
-			resultsStockOrder = stmt.executeQuery(sqlStockOrder);
-			while (resultsStockOrder.next())
-				{
-				int stockOrderID = resultsStockOrder.getInt("stock_order_id");
-				int supplierID = resultsStockOrder.getInt("supplier_id");
-				String status = resultsStockOrder.getString("status");
-				StockOrder stockOrder = new StockOrder(stockOrderID,supplierID,status);
-				arrayStockOrder.add(stockOrder);
-				}
-			resultsStockOrder.close();
-			}
-		catch (SQLException e) 
-		{e.printStackTrace();}
+//		ResultSet resultsStockOrder;
+//		arrayStockOrder = new ArrayList<StockOrder>();
+//		try {
+//			String sqlStockOrder = "SELECT stock_order_id,supplier_id,status FROM stockorder";
+//			resultsStockOrder = stmt.executeQuery(sqlStockOrder);
+//			while (resultsStockOrder.next())
+//				{
+//				int stockOrderID = resultsStockOrder.getInt("stock_order_id");
+//				int supplierID = resultsStockOrder.getInt("supplier_id");
+//				String status = resultsStockOrder.getString("status");
+//				StockOrder stockOrder = new StockOrder(stockOrderID,supplierID,status);
+//				arrayStockOrder.add(stockOrder);
+//				}
+//			resultsStockOrder.close();
+//			}
+//		catch (SQLException e) 
+//		{e.printStackTrace();}
 		
 		ResultSet resultsStockOrderLine;
 		arrayStockOrderLine = new ArrayList<StockOrderLine>();
@@ -321,6 +328,95 @@ public class WarehouseOrderManager {
 		}		
 	}	
 	
+	public static ArrayList<CustomerOrder> sqlrCustomerOrder(){
+	ResultSet resultsCustomerOrder;
+  	ArrayList<CustomerOrder> arrayCustomerOrder = new ArrayList<CustomerOrder>(); //create empty array
+  	try {
+  		String sqlCustomerOrder = "SELECT customer_order_id,customer_id,status FROM customerorder"; //SELECT variable1,variable2 FROM tablename in MySQL
+  		resultsCustomerOrder = stmt.executeQuery(sqlCustomerOrder);
+  		while (resultsCustomerOrder.next()) 
+  			{
+  			 int customerOrderID = resultsCustomerOrder.getInt("customer_order_id"); //variabletype variable = nameofresultset.gettypeofvariable(variable name in MySQL)
+  			 int customerID = resultsCustomerOrder.getInt("customer_id");
+  			 // String customerOrderIDstring = Integer.toString(customerOrderID);
+  			 // coidLabel.setText(customerOrderIDstring);
+  			 String status = resultsCustomerOrder.getString("status");
+  			 CustomerOrder customerOrder = new CustomerOrder(customerOrderID,customerID, status); //packages the variables in each row so that they can be input into array
+  			 arrayCustomerOrder.add(customerOrder); //inputs the variables into the array
+  			}
+  		resultsCustomerOrder.close();
+  		} 
+  	catch (SQLException e) 
+  	{e.printStackTrace();}
+  	
+  		return arrayCustomerOrder;
+	}
+	
+	public static ArrayList<OrderLine> sqlrOrderLine(){
+	ResultSet resultsOrderLine;
+	ArrayList<OrderLine> arrayOrderLine = new ArrayList<OrderLine>();
+	try {
+		String sqlOrderLine = "SELECT customer_order_id,product_id,quantity,quantity_porous FROM orderline";
+		resultsOrderLine = stmt.executeQuery(sqlOrderLine);
+		while (resultsOrderLine.next())
+			{
+			int customerOrderID = resultsOrderLine.getInt("customer_order_id");
+			int productID = resultsOrderLine.getInt("product_id");
+			int quantity = resultsOrderLine.getInt("quantity");
+			int porousQuantity = resultsOrderLine.getInt("quantity_porous");
+			OrderLine orderLine = new OrderLine(customerOrderID,productID,quantity,porousQuantity);
+			arrayOrderLine.add(orderLine);
+			}
+		resultsOrderLine.close();
+		}
+	catch (SQLException e) 
+	{e.printStackTrace();}
+	return arrayOrderLine;
+	}
+	
+	public static ArrayList<StockOrder> sqlrStockOrder(){
+	ResultSet resultsStockOrder;
+	ArrayList<StockOrder> arrayStockOrder = new ArrayList<StockOrder>();
+	try {
+		String sqlStockOrder = "SELECT stock_order_id,supplier_id,status FROM stockorder";
+		resultsStockOrder = stmt.executeQuery(sqlStockOrder);
+		while (resultsStockOrder.next())
+			{
+			int stockOrderID = resultsStockOrder.getInt("stock_order_id");
+			int supplierID = resultsStockOrder.getInt("supplier_id");
+			String status = resultsStockOrder.getString("status");
+			StockOrder stockOrder = new StockOrder(stockOrderID,supplierID,status);
+			arrayStockOrder.add(stockOrder);
+			}
+		resultsStockOrder.close();
+		}
+	catch (SQLException e) 
+	{e.printStackTrace();}
+		return arrayStockOrder;
+	}
+  
+	public static ArrayList<Stock> sqlrStock(){
+	ResultSet resultsStock;
+	ArrayList<Stock> arrayStock = new ArrayList<Stock>();
+	try {
+		String sqlStock = "SELECT product_id, quantity, porous_quantity, threshold FROM stock";
+		resultsStock = stmt.executeQuery(sqlStock);
+		while (resultsStock.next())
+			{
+			int productID = resultsStock.getInt("product_id");
+			int quantity = resultsStock.getInt("quantity");
+			int porousQuantity = resultsStock.getInt("porous_quantity");
+			int threshold = resultsStock.getInt("threshold");
+			Stock stock = new Stock(productID,quantity,porousQuantity,threshold);
+			arrayStock.add(stock);
+			}
+		resultsStock.close();
+		}
+	catch (SQLException e) 
+	{e.printStackTrace();}
+		return arrayStock;
+	}
+	
 	private int printMainMenu() {
 		System.out.println();
 		System.out.println("NB Gardens IMS\n");
@@ -340,6 +436,8 @@ public class WarehouseOrderManager {
 	
 	private void printCustomerOrders()
 	{
+	ArrayList<OrderLine> arrayOrderLine = sqlrOrderLine();
+	ArrayList<CustomerOrder> arrayCustomerOrder = sqlrCustomerOrder();
 	System.out.println("Current customer orders:\n\nOrd ID\tCust ID\tstatus\n===========================");
 	for(CustomerOrder c : arrayCustomerOrder)
 	{System.out.printf("%s\n",c);}
@@ -362,6 +460,8 @@ public class WarehouseOrderManager {
 	
 	private void printChangeCustomerOrderStatus()
 	{
+	ArrayList<CustomerOrder> arrayCustomerOrder = sqlrCustomerOrder();
+	
 	System.out.println("Current customer orders:");
 	System.out.println();
 	System.out.println("ID\tstatus");
@@ -428,6 +528,7 @@ public class WarehouseOrderManager {
 	}
 	
 	private void printCustomerOrderRoute(){
+		sqlrCustomerOrder();
 	System.out.println("Current customer orders:");
 	System.out.println();
 	System.out.println("Ord ID\tCust ID\tstatus");
@@ -488,13 +589,7 @@ public class WarehouseOrderManager {
 						arrayNN.get(coordinate).setStatus(true); //sets true so that for function removes arrayNN row that was the best route so that it isn't included in next pass
 					}
 					q++;
-					//if() //want a decreasing number starting at original array size for NN -1 each count
-					//oldX = arrayNN.get(coordinate).getX(); //sets the X values for the coordinate of the best route
-					//oldY = arrayNN.get(coordinate).getY(); //sets the Y values for the coordinate of the best route
-					//arrayNN.get(coordinate).setStatus(true); //sets true so that for function removes arrayNN row that was the best route so that it isn't included in next pass
-
-				}
-				
+				}			
 			}	
 		q=0;
 		count++;	
@@ -511,6 +606,7 @@ public class WarehouseOrderManager {
 	}
 	
 	private void printStockOrder(){
+		sqlrStockOrder();
 		System.out.println("ID\tCost\tStatus");
 		for(StockOrder c : arrayStockOrder)
 		{System.out.printf("%s\n",c);}
@@ -531,6 +627,7 @@ public class WarehouseOrderManager {
 	}
 	
 	private void printChangeStockOrder(){
+		sqlrStockOrder();
 		System.out.println("Current Stock Orders:");
 		System.out.println();
 		System.out.println("ID\tSupp ID\tStatus");
