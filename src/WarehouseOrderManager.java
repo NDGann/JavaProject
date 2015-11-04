@@ -31,7 +31,7 @@ public class WarehouseOrderManager {
 	private void run() {
 		input = new Scanner(System.in);
 		final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-		final String DB_URL = "jdbc:mysql://10.50.15.1:3306/nbdatabase";
+		final String DB_URL = "jdbc:mysql://10.50.26.1:3306/nbdatabase";
 		final String USER = "root";
 		final String PASS = "NETbuilder";
 	
